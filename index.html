@@ -907,7 +907,7 @@ function naviCands(){const c=[],stn=ST.filter(x=>!x.home&&!x.random&&TALK[x.id])
   if(!c.length)return NAVI_TIPS.slice();return c}
 function naviProgress(){const tt=talkTotal(),ps=passedN(),rd=readN(),tot=Object.values(REC.ans).reduce((a,x)=>[a[0]+x[0],a[1]+x[1]],[0,0]),rate=tot[1]?Math.round(tot[0]/tot[1]*100):null;
   const tail=ps>=tt?'全部の話に合格！ あとは、おさらいで忘れないようにしよう。':rd===0?'まずは1話、先生の話を聞いてみよう！':ps===0?'クイズに合格すると、ここが増えていくよ。':`あと**${tt-ps}話**で全部合格だよ。`;
-  return `合格は**${ps}/${tt}話**、聞いた話は**${rd}話**${rate!=null?`、正答率は**${rate}%**`:''}。${tail}`}
+  return `合格は**${ps}/${tt}話**、聞いた話は**${rd}話**${rate!=null?`、正答率は**${rate}%**（${tot[1]}問中）`:'、クイズはまだ答えていないよ'}。${tail}`}
 const NAVI=(()=>{
   const face=document.getElementById('nvFace'),bub=document.getElementById('nvBub'),txt=document.getElementById('nvTxt');
   let k=-1,cur=null,timer=0,typ=0;
@@ -1075,7 +1075,7 @@ function openVisit(s,L,isTopic){if(!s.random)useFaces(s.id);let n=0,score=0,flap
    <div class="vs-stage"${VISIT_BG?` style="background-image:url(${VISIT_BG})"`:''}>
      <div class="vs-hud"><span class="vs-n"></span><span class="qbar"><i class="vs-b"></i></span><span class="vs-s"></span></div>
      <img class="vs-h" alt="" draggable="false"><img class="vs-c" alt="" draggable="false">
-     <div class="vs-bub"><div class="vs-who">お客さま</div><div class="vs-q"></div></div>
+     <div class="vs-bub" hidden><div class="vs-who">お客さま</div><div class="vs-q"></div></div>
    </div><div class="vs-low"></div>`;
   scene.appendChild(p);requestAnimationFrame(()=>requestAnimationFrame(()=>p.classList.add('on')));
   const cImg=p.querySelector('.vs-c'),hImg=p.querySelector('.vs-h'),bub=p.querySelector('.vs-bub'),qEl=p.querySelector('.vs-q'),low=p.querySelector('.vs-low');
@@ -1083,7 +1083,7 @@ function openVisit(s,L,isTopic){if(!s.random)useFaces(s.id);let n=0,score=0,flap
   const pick=a=>a[Math.floor(Math.random()*a.length)];
   const bounce=el=>{el.classList.remove('react');void el.offsetWidth;el.classList.add('react')};
   function say(text,pose,done,who){who=who||'c';const img=who==='c'?cImg:hImg,pr=PAIR(who,pose),rest=F1(who,pose,false);
-    clearInterval(flap);clearInterval(typer);bub.classList.toggle('me',who==='h');p.querySelector('.vs-who').textContent=who==='c'?(s.random?'常連さん':'お客さま'):'あなた';
+    clearInterval(flap);clearInterval(typer);bub.hidden=false;qEl.textContent='';bub.classList.toggle('me',who==='h');p.querySelector('.vs-who').textContent=who==='c'?(s.random?'常連さん':'お客さま'):'あなた';
     bub.classList.remove('pop');void bub.offsetWidth;bub.classList.add('pop');
     const plain=text.replace(/\*\*/g,'');if(RM){qEl.innerHTML=rich(text);img.src=rest;done&&done();return}
     let k=0,o=false;flap=setInterval(()=>{o=!o;img.src=o?pr.o:pr.c},130);
@@ -3350,7 +3350,7 @@ function enterScene(s,instant){if(s.home)return enterHome(s,instant);if(s.random
   const done=()=>{ask.querySelectorAll('button').forEach(b=>b.classList.add('in'))};
   if(RM){say.textContent=msg;done()}else setTimeout(()=>{typing=setInterval(()=>{say.textContent=msg.slice(0,++k);if(k>=msg.length){clearInterval(typing);done()}},38)},450);
   const L=LESSON[s.id];
-  function stUpd(){if(!TALK[s.id])return;const m=stSum(s.id),rs=ask.querySelector('.rm-sum');if(rs)rs.innerHTML=`<b>${m.n}話</b>のうち　聞いた <b>${m.rd}</b>　合格 <b>${m.ps}</b>${m.rate!=null?`　正答率 <b>${m.rate}%</b>`:''}`;
+  function stUpd(){if(!TALK[s.id])return;const m=stSum(s.id),rs=ask.querySelector('.rm-sum');if(rs)rs.innerHTML=`<b>${m.n}話</b>のうち　聞いた <b>${m.rd}</b>　合格 <b>${m.ps}</b>${m.rate!=null?`　正答率 <b>${m.rate}%</b>（${m.tot}問）`:''}`;
     ask.querySelectorAll('button:not(.quizbtn)').forEach((b,i)=>{const t=talkStat(s.id,i),e=b.querySelector('.stt');if(e){e.className='stt '+t.cls;e.textContent=t.txt}b.classList.toggle('done',t.cls==='pass');b.classList.toggle('heard',t.cls!=='new'&&t.cls!=='pass')})}
   if(L){const st=progress(s.id);ask.querySelectorAll('button').forEach((b,i)=>{if(st.read.has(i))b.classList.add('done')});
     const q=document.createElement('button');q.type='button';q.className='quizbtn';q.hidden=true;q.style.setProperty('--i',4);ask.appendChild(q);
@@ -3395,7 +3395,7 @@ function enterHome(s,instant){
   scene.innerHTML=`<div class="sc-top"><button class="back" type="button" id="back">‹ マップ</button><b>あなたの家</b></div>
    <div class="sc-body hm">
     <img class="hm-ban" src="${ICX.banner}" alt=""><div class="hm-card"><img src="${F1('h','idle')}" alt=""><div><div class="hm-lv">全体の進み具合</div><div class="hm-name">${pct}<small>%</small></div><div class="hm-bar"><i style="width:${Math.max(2,pct)}%"></i></div><small>${ps>=tt?'すべての話に合格しました':`${tt}話のうち ${ps}話 合格・あと${tt-ps}話`}</small></div></div>
-    <div class="hm-stats"><div><b>${ps}<small>/${tt}</small></b><span>合格した話</span></div><div><b>${rd}<small>/${tt}</small></b><span>聞いた話</span></div><div><b>${rate==null?'—':rate+'<small>%</small>'}</b><span>正答率</span></div></div>
+    <div class="hm-stats"><div><b>${ps}<small>/${tt}</small></b><span>合格した話</span></div><div><b>${rd}<small>/${tt}</small></b><span>聞いた話</span></div><div><b>${rate==null?'—':rate+'<small>%</small>'}</b><span>${rate==null?'正答率<br>まだ回答なし':`正答率<br>${tot[1]}問中`}</span></div></div>
     <section class="hm-do"><h3>くり返して覚える</h3>
       <button type="button" class="hm-act ic" id="hmMiss"${mk.length?'':' disabled'}><img src="${ICX.note}" alt=""><b>間違えた問題を解き直す</b><span>${mk.length?`${mk.length}問あります。2回続けて正解すると、リストから外れます。`:'今は間違えた問題はありません。'}</span></button>
       ${due.length?due.map(k=>{const [st,ti]=k.split(':'),x=byId[st],T=TALK[st][+ti],o=REC.q[k];return `<button type="button" class="hm-act due ic" data-rv="${k}" style="--c:var(${x.line})"><img src="${ICX.rv}" alt=""><b>おさらい：${esc(x.name)}「${esc(T.t)}」</b><span>${['3日','1週間','1か月'][o.rv.stage]}たちました。5問で確かめましょう（4問正解で次へ）。</span></button>`}).join(''):`<p class="hm-empty">${nd?`次のおさらいは ${new Date(nd).getMonth()+1}/${new Date(nd).getDate()} です。合格した話は、3日後・1週間後・1か月後にここに出ます。`:'合格した話は、3日後・1週間後・1か月後にここでおさらいできます。'}</p>`}
@@ -3460,7 +3460,7 @@ document.getElementById('reset').addEventListener('click',()=>{showTitle();hideC
 <script id="mr-noscroll">(function(){var e=document.getElementById("screen");if(e)e.addEventListener("scroll",function(){if(e.scrollTop||e.scrollLeft){e.scrollTop=0;e.scrollLeft=0}})})();</script>
 
 <script id="mr-upd">(function(){
-var B="20261117-1348-cfb77e4e",bar=null,busy=false;
+var B="20261117-1412-ecff633a",bar=null,busy=false;
 function chk(){return fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){return j&&j.build&&j.build!==B?j.build:null}).catch(function(){return null})}
 function go(v){location.replace(location.pathname+'?v='+encodeURIComponent(v||Date.now()))}
 function show(v){if(bar)return;bar=document.createElement('div');bar.className='mr-upd';bar.setAttribute('role','status');
