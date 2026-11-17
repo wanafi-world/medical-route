@@ -565,6 +565,56 @@ h1{font-size:clamp(22px,4vw,28px);font-weight:800;margin:0;line-height:1.35;text
 .mo-src{font-size:11.5px;line-height:1.6;color:var(--muted);background:#fff;border-radius:8px;padding:7px 10px;margin:4px 0 8px}
 .mo-src b{display:block;font-size:10.5px;color:var(--ink);margin-bottom:1px}
 .mo-foot{padding:8px 14px 14px}
+/* ROAD */
+.road{position:absolute;inset:0;z-index:12;background:var(--paper);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .4s cubic-bezier(.2,1,.3,1);--c:var(--hm);touch-action:manipulation;-webkit-touch-callout:none;padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}
+.road.on{transform:none}
+.road .pn-top b{margin-left:auto;color:var(--ink);font-size:12.5px}
+.rd-game{position:relative;flex:none;overflow:hidden;touch-action:none;border-bottom:2px solid #1C2433}
+.rd-game canvas{display:block}
+.rd-hud{position:absolute;left:8px;right:8px;top:8px;display:flex;align-items:center;gap:6px;pointer-events:none}
+.rd-hs{display:flex;gap:4px}
+.rd-hs i{font-style:normal;width:22px;height:22px;border-radius:7px;background:rgba(255,255,255,.85);border:1.5px solid #1C2433;display:grid;place-items:center;font-size:11px;font-weight:800;color:#1C2433}
+.rd-hs i.cur{background:#F6C85F}.rd-hs i.done{background:#3E9B5F;color:#fff}
+.rd-sc{margin-left:auto;background:rgba(255,255,255,.9);border:1.5px solid #1C2433;border-radius:10px;padding:1px 9px;font-size:12px;font-weight:700}
+.rd-sc b{font-size:15px}
+.rd-pop{position:absolute;left:50%;top:40px;transform:translateX(-50%);background:#fff;border:2px solid #1C2433;border-radius:12px;padding:6px 12px;font-size:13px;text-align:center;line-height:1.45;white-space:nowrap;box-shadow:0 4px 0 rgba(28,36,51,.15);pointer-events:none;max-width:92%}
+.rd-pop small{display:block;font-size:11.5px;color:var(--muted)}
+.rd-pop b{color:#C2413A}
+.rd-pop.in{animation:rdpop .3s cubic-bezier(.3,1.5,.5,1)}
+@keyframes rdpop{from{transform:translate(-50%,-6px) scale(.9);opacity:0}to{transform:translate(-50%,0) scale(1);opacity:1}}
+.rd-low{flex:1;min-height:0;overflow:auto;padding:12px 14px 16px;-webkit-overflow-scrolling:touch}
+.rd-intro h3{font-size:16px;margin:0 0 6px}
+.rd-intro p{font-size:13px;line-height:1.7;margin:0 0 8px;color:var(--ink)}
+.rd-legend{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
+.rd-legend span{display:flex;align-items:center;gap:4px;background:var(--card);border-radius:10px;padding:3px 6px 3px 2px;font-size:11px;line-height:1.25;box-shadow:0 1px 0 #E3E7EE;position:relative}
+.rd-legend img{width:30px;height:30px;flex:none}
+.rd-legend b{font-weight:700}
+.rd-legend span.got{background:#E7F7EE}
+.rd-legend em{font-style:normal;font-weight:800;color:#14663F;margin-left:auto}
+.rd-rec{font-size:12px;color:var(--muted);margin:6px 0}
+.rd-run .rd-go{font-size:14px;margin-bottom:6px}.rd-run .rd-go b{font-size:16px}
+.rd-how{display:flex;align-items:center;gap:8px;font-size:12.5px;background:var(--card);border-radius:12px;padding:8px 10px;box-shadow:0 1px 0 #E3E7EE}
+.rd-tap{flex:none;background:#1C2433;color:#fff;border-radius:8px;padding:2px 8px;font-size:11px;font-weight:800;animation:rdtap 1.4s ease-in-out infinite}
+@keyframes rdtap{50%{transform:scale(.9)}}
+.rd-note{font-size:12px;color:var(--muted);margin:4px 0 0}
+.rd-q{display:grid;gap:8px}
+.rd-qh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.rd-qh b{font-size:14px}.rd-qh span{font-size:11.5px;color:var(--muted)}
+.rd-ask{display:grid;grid-template-columns:54px 1fr;gap:8px;align-items:start}
+.rd-ask img{width:54px;height:54px;border-radius:50%;object-fit:cover;object-position:50% 12%;background:#fff;border:2px solid var(--c)}
+.rd-bub{background:var(--card);border-radius:4px 14px 14px 14px;padding:8px 11px;font-size:14px;line-height:1.6;box-shadow:0 1px 0 #E3E7EE;animation:rise .3s cubic-bezier(.3,1.3,.5,1)}
+.rd-bub em.red{font-style:normal;font-weight:800;color:#1F56C4}
+.rd-q .qc button{opacity:0;animation:rise .35s cubic-bezier(.3,1.3,.5,1) forwards;animation-delay:calc(var(--i)*.06s)}
+.rd-nv{display:flex;align-items:center;gap:8px;font-size:12.5px;background:#1C2433;color:#fff;border-radius:12px;padding:6px 10px;animation:rise .35s cubic-bezier(.3,1.3,.5,1)}
+.rd-nv img{width:34px;height:38px;object-fit:contain;flex:none}.rd-nv b{color:#F6C85F}
+.rd-bt{display:grid;gap:6px}.rd-bt .btn.ghost{font-size:13px}
+.rd-end{display:grid;gap:10px}
+.rd-e1{display:flex;gap:10px;align-items:center}.rd-e1 img{width:52px;height:58px;object-fit:contain}.rd-e1 b{display:block;font-size:16px}.rd-e1 small{font-size:12px;color:var(--muted);line-height:1.5;display:block}
+.rd-list{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.rd-list li{display:flex;gap:8px;align-items:center;background:var(--card);border-radius:10px;padding:6px 10px;font-size:12px}
+.rd-list i{font-style:normal;font-weight:800;width:18px;text-align:center}.rd-list li.ok i{color:#1F9D61}.rd-list li.ng i{color:#C2413A}
+.rd-end .btns{margin-top:2px}
+.hm-road .hm-act{width:100%;border-color:var(--hm)}
+/* ROAD END */
 </style>
 <style id="mr-upd-css">
 .mr-upd{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 58px);transform:translate(-50%,-150%);z-index:60;
@@ -815,7 +865,7 @@ const BGM=(()=>{let on=true;try{on=localStorage.getItem('mr-bgm')!=='off'}catch(
   function go(m){want=m;if(!on||!c||m===mode)return;mode=m;Object.keys(tr).forEach(k=>{if(k!==m)fadeTo(tr[k].g,0,1)});play(m).catch(e=>{window.__bgmErr=String(e)})}
   function start(){if(!on)return;c=SFX.ctx();if(!c)return;started=true;mode=null;go(want)}
   function stop(){Object.values(tr).forEach(x=>fadeTo(x.g,0,.5));mode=null}
-  setInterval(()=>{const m=document.querySelector('.visit')?'visit':(document.getElementById('scene').classList.contains('on')?'talk':'map');if(m!==want||m!==mode)go(m)},500);
+  setInterval(()=>{const m=document.querySelector('.road')?'map':document.querySelector('.visit')?'visit':(document.getElementById('scene').classList.contains('on')?'talk':'map');if(m!==want||m!==mode)go(m)},500);
   document.addEventListener('visibilitychange',()=>{if(!on||!c||!mode||!tr[mode])return;fadeTo(tr[mode].g,document.hidden?0:LVL[mode],.5)});
   return {get vol(){return vol},set vol(v){vol=v;try{localStorage.setItem('mr-bgm-vol',v)}catch(e){}if(mg)mg.gain.setTargetAtTime(v,c.currentTime,.05)},get on(){return on},set on(v){on=v;try{localStorage.setItem('mr-bgm',v?'on':'off')}catch(e){}v?start():stop()},start}})();
 document.addEventListener('pointerdown',()=>BGM.start(),{once:true,capture:true});
@@ -939,6 +989,7 @@ function naviCands(){const c=[],stn=ST.filter(x=>!x.home&&!x.random&&TALK[x.id])
   const tr=all.filter(x=>x.k==='try'||x.k==='read');if(tr.length){const x=tr[0];c.push({t:x.k==='try'?`「**${x.T.t}**」はあと少しで合格。もう一度挑戦してみる？`:`「**${x.T.t}**」は聞いたね。クイズに挑戦してみよう！`,st:x.s.id,i:x.i})}
   const nw=all.filter(x=>x.k==='new');if(nw.length){const x=nw[Math.floor(Math.random()*nw.length)];c.push({t:`まだ聞いていない話：**${x.s.name}**の「${x.T.t}」。聞きに行こう！`,st:x.s.id,i:x.i})}
   if(readN()>=3)c.push({t:'聞いた話から、常連さんが**ランダムに10問**聞いてくれるよ。',st:'kyaku'});
+  c.push(REC.road&&REC.road.runs?{t:`**ナビの訪問ロード**、これまで**${REC.road.houses}軒**まわったね。また一緒に走ろう！`,st:'road'}:{t:'**ナビの訪問ロード**で、お客さまの家を回ってみない？ ぼくが走るよ！',st:'road'});
   if(!c.length)return NAVI_TIPS.slice();return c}
 function naviProgress(){const tt=talkTotal(),ps=passedN(),rd=readN(),tot=Object.values(REC.ans).reduce((a,x)=>[a[0]+x[0],a[1]+x[1]],[0,0]),rate=tot[1]?Math.round(tot[0]/tot[1]*100):null;
   const tail=ps>=tt?'全部の話に合格！ あとは、おさらいで忘れないようにしよう。':rd===0?'まずは1話、先生の話を聞いてみよう！':ps===0?'クイズに合格すると、ここが増えていくよ。':`あと**${tt-ps}話**で全部合格だよ。`;
@@ -972,16 +1023,16 @@ const NAVI=(()=>{
     const c=naviCands();if(!c.length){cur=tip();render(cur.t,true);return}k=(k+1)%c.length;cur=c[k];render(cur.t,true)}
   function top(){bub.classList.remove('hint');const c=naviCands();k=0;cur=c[0];render(cur.t,true)}
   function talk(t){cur=null;render(t,false)}
-  function idle(){return menu.classList.contains('on')||helper.classList.contains('away')||busy||document.getElementById('title')?.getAttribute('aria-hidden')==='false'||document.hidden}
+  function idle(){return menu.classList.contains('on')||helper.classList.contains('away')||busy||document.getElementById('title')?.getAttribute('aria-hidden')==='false'||document.hidden||!!document.querySelector('.road')}
   function loop(){clearTimeout(timer);timer=setTimeout(()=>{if(!idle())next();loop()},9000)}
   const go=id=>{const s=byId[id];if(!s||!s.el||busy)return;SFX.play('tap');tapStation(s,s.el)};
-  bub.addEventListener('click',e=>{if(cur&&cur.hint){e.stopPropagation();if(!busy)face.click();return}shut();if(!cur||busy)return;const s=byId[cur.st];if(!s||!s.el)return;NAVI_HL=cur.i!=null?{st:s.id,i:cur.i}:null;SFX.play('tap');tapStation(s,s.el)});
+  bub.addEventListener('click',e=>{if(cur&&cur.hint){e.stopPropagation();if(!busy)face.click();return}shut();if(!cur||busy)return;if(cur.st==='road'){openRoad();return}const s=byId[cur.st];if(!s||!s.el)return;NAVI_HL=cur.i!=null?{st:s.id,i:cur.i}:null;SFX.play('tap');tapStation(s,s.el)});
   const menu=document.createElement('div');menu.className='nv-menu';menu.setAttribute('role','menu');
-  menu.innerHTML=`<button type="button" data-n="top">今日のおすすめは？</button><button type="button" data-n="prog">進み具合を教えて</button><button type="button" data-n="kyaku">常連さんに質問してもらう</button><button type="button" data-n="home">家で記録を見る</button><button type="button" data-n="next">ほかのひとこと</button>`;
+  menu.innerHTML=`<button type="button" data-n="top">今日のおすすめは？</button><button type="button" data-n="prog">進み具合を教えて</button><button type="button" data-n="kyaku">常連さんに質問してもらう</button><button type="button" data-n="road">ナビの訪問ロードで遊ぶ</button><button type="button" data-n="home">家で記録を見る</button><button type="button" data-n="next">ほかのひとこと</button>`;
   helper.appendChild(menu);
   function shut(){menu.classList.remove('on');face.setAttribute('aria-expanded','false')}
   menu.addEventListener('click',e=>{const b=e.target.closest('[data-n]');if(!b)return;e.stopPropagation();const n=b.dataset.n;shut();
-    if(n==='top')top();else if(n==='prog')talk(naviProgress());else if(n==='next')next();else go(n);loop()});
+    if(n==='road')openRoad();else if(n==='top')top();else if(n==='prog')talk(naviProgress());else if(n==='next')next();else go(n);loop()});
   face.addEventListener('click',e=>{e.stopPropagation();if(busy)return;const on=!menu.classList.contains('on');menu.classList.toggle('on',on);face.setAttribute('aria-expanded',on);SFX.play('tap');if(!tapped){tapped=true;try{localStorage.setItem(TAPK,'1')}catch(e){}face.querySelector('.nv-tap')?.remove()}if(on)bub.classList.remove('hint'),render('なにをしようか？',false),cur=null});
   document.addEventListener('click',e=>{if(menu.classList.contains('on')&&!menu.contains(e.target)&&e.target!==face)shut()});
   if(!tapped){const t=document.createElement('span');t.className='nv-tap';t.textContent='タップ';face.appendChild(t)}
@@ -3436,7 +3487,7 @@ function enterHome(s,instant){
   const good=rated.filter(r=>r.rate>=80).slice(0,2),weak=rated.slice().reverse().filter(r=>r.rate<80).slice(0,2);
   const chipSt=r=>`<span class="hm-st" style="--c:var(${r.s.line})"><i>${pic(r.s.id)}</i><b>${esc(r.s.name)}</b><em>${r.rate}%</em></span>`;
   const fmt=t=>{const d=new Date(t);return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};
-  const logs=REC.log.slice(0,10).map(e=>{const x=e.st==='home'?{name:'',line:'--hm'}:e.st==='kyaku'?{name:'',line:'--ky'}:(byId[e.st]||{name:'',line:'--hq'});return `<li style="--c:var(${x.line})"><time>${fmt(e.at)}</time><span>${e.st==='home'||e.st==='kyaku'?`<b>${esc(e.t)}</b>`:`<b>${esc(x.name)}</b>「${esc(e.t||'')}」`}${e.k==='talk'?'を聞いた':`の${e.k==='rv'?'おさらい':e.k==='miss'?'':'クイズ'} ${e.sc}/${e.n}問 ${e.pass?'<em class="ok">'+(e.k==='quiz'?'合格':'よくできました')+'</em>':'<em>もう一歩</em>'}`}</span></li>`}).join('');
+  const logs=REC.log.slice(0,10).map(e=>{const x=e.st==='home'?{name:'',line:'--hm'}:e.st==='kyaku'?{name:'',line:'--ky'}:(byId[e.st]||{name:'',line:'--hq'});return `<li style="--c:var(${x.line})"><time>${fmt(e.at)}</time><span>${e.st==='home'||e.st==='kyaku'?`<b>${esc(e.t)}</b>`:`<b>${esc(x.name)}</b>「${esc(e.t||'')}」`}${e.k==='road'?`　${e.n}軒を訪問・正解 ${e.sc}問`:e.k==='talk'?'を聞いた':`の${e.k==='rv'?'おさらい':e.k==='miss'?'':'クイズ'} ${e.sc}/${e.n}問 ${e.pass?'<em class="ok">'+(e.k==='quiz'?'合格':'よくできました')+'</em>':'<em>もう一歩</em>'}`}</span></li>`}).join('');
   scene.innerHTML=`<div class="sc-top"><button class="back" type="button" id="back">‹ マップ</button><b>あなたの家</b></div>
    <div class="sc-body hm">
     <img class="hm-ban" src="${ICX.banner}" alt=""><div class="hm-card"><img src="${F1('h','idle')}" alt=""><div><div class="hm-lv">全体の進み具合</div><div class="hm-name">${pct}<small>%</small></div><div class="hm-bar"><i style="width:${Math.max(2,pct)}%"></i></div><small>${ps>=tt?'すべての話に合格しました':`${tt}話のうち ${ps}話 合格・あと${tt-ps}話`}</small></div></div>
@@ -3445,6 +3496,7 @@ function enterHome(s,instant){
       <button type="button" class="hm-act ic" id="hmMiss"${mk.length?'':' disabled'}><img src="${ICX.note}" alt=""><b>間違えた問題を解き直す</b><span>${mk.length?`${mk.length}問あります。2回続けて正解すると、リストから外れます。`:'今は間違えた問題はありません。'}</span></button>
       ${due.length?due.map(k=>{const [st,ti]=k.split(':'),x=byId[st],T=TALK[st][+ti],o=REC.q[k];return `<button type="button" class="hm-act due ic" data-rv="${k}" style="--c:var(${x.line})"><img src="${ICX.rv}" alt=""><b>おさらい：${esc(x.name)}「${esc(T.t)}」</b><span>${['3日','1週間','1か月'][o.rv.stage]}たちました。5問で確かめましょう（4問正解で次へ）。</span></button>`}).join(''):`<p class="hm-empty">${nd?`次のおさらいは ${new Date(nd).getMonth()+1}/${new Date(nd).getDate()} です。合格した話は、3日後・1週間後・1か月後にここに出ます。`:'合格した話は、3日後・1週間後・1か月後にここでおさらいできます。'}</p>`}
     </section>
+    <section class="hm-road"><h3>ナビの訪問ロード</h3><button type="button" class="hm-act ic" id="hmRoad"><img src="${typeof NAVI_FACE!=='undefined'?NAVI_FACE.happy.c:''}" alt=""><b>お客さまの家を5軒まわる</b><span>${REC.road&&REC.road.runs?`これまで ${REC.road.houses}軒を訪問・正解 ${REC.road.ok}問（${REC.road.runs}回）`:'ナビが町を走るミニゲーム。家に着くとお客さまが1問質問してきます。'}</span></button></section>
     <section><h3>得意な分野</h3>${good.length?`<div class="hm-chips">${good.map(chipSt).join('')}</div>`:`<p class="hm-empty">${rated.length?'正答率80%以上の分野が出ると、ここに出ます。':'1つの先生のクイズに10問以上答えると、ここに出ます。'}</p>`}</section>
     <section><h3>苦手な分野</h3>${weak.length?`<div class="hm-chips weak">${weak.map(chipSt).join('')}</div><p class="hm-tip">正答率が80%より低い分野です。もう一度話を聞いてから、クイズに挑戦してみましょう。</p>`:`<p class="hm-empty">${rated.length?'今のところ、苦手な分野はありません。':'1つの先生のクイズに10問以上答えると、ここに出ます。'}</p>`}</section>
     <section><h3>先生ごとの進み具合</h3><ul class="hm-prog">${rows.map(r=>`<li style="--c:var(${r.s.line})"><i>${pic(r.s.id)}</i><b>${esc(r.s.name)}</b><span class="hm-pb"><span style="width:${r.n?r.ps/r.n*100:0}%"></span></span><em>${r.ps}/${r.n}</em></li>`).join('')}</ul></section>
@@ -3455,6 +3507,7 @@ function enterHome(s,instant){
   if(instant){scene.style.transition='none';scene.classList.add('on');void scene.offsetWidth;scene.style.transition=''}else requestAnimationFrame(()=>scene.classList.add('on'));
   document.getElementById('back').addEventListener('click',leaveScene);
   const again=()=>enterHome(s,true);
+  document.getElementById('hmRoad')?.addEventListener('click',()=>openRoad({onExit:again}));
   const mb=document.getElementById('hmMiss');mb.addEventListener('click',()=>{const ks=missKeys().slice(0,10);if(!ks.length)return;
     openVisit(s,{topic:'前に聞いた病気',pass:Math.ceil(ks.length*.8),title:'間違えた問題の解き直し',quiz:ks.map(qOf),_k:ks,_closed:again,
       _end:(sc,ok)=>{recLog({k:'miss',st:'home',t:'間違えた問題の解き直し',sc,n:ks.length,pass:ok});recSave()}},true)});
@@ -3465,6 +3518,220 @@ function enterHome(s,instant){
         recLog({k:'rv',st,i:+ti,t:T.t,sc,n:5,pass:ok});recSave()}},true)}));
   const rb=document.getElementById('hmReset');rb.addEventListener('click',()=>{if(rb.dataset.sure){REC={read:{},q:{},ans:{},log:[],miss:{}};recSave();Object.keys(PROG).forEach(k=>delete PROG[k]);hudUpd();mapUpd();enterHome(s,true);showToast('記録を消しました')}else{rb.dataset.sure='1';rb.textContent='本当に消す場合は、もう一度押してください'}});
 }
+/* ROAD */
+/* ---------- ナビの訪問ロード: a gentle side-scrolling mini game. Navi runs through town, each house asks one quiz question ---------- */
+const ROAD_EN={
+  salt:{name:'塩分',tip:'塩分のとりすぎは、高血圧のもと',kind:'walk'},
+  smoke:{name:'タバコのけむり',tip:'タバコは、がん・心臓・脳の病気のもと',kind:'walk'},
+  sofa:{name:'運動不足',tip:'体を動かすと、生活習慣病の予防に',kind:'walk'},
+  sugar:{name:'糖分のとりすぎ',tip:'とりすぎは、肥満や高血糖のもと',kind:'walk'},
+  night:{name:'夜ふかし',tip:'睡眠不足は、心と体の不調のもと',kind:'fly'},
+  stress:{name:'ストレス',tip:'ためこまず、休んで発散しよう',kind:'hop'}
+};
+const ROAD_HOUSES=5;
+function roadPool(){const heard=[],all=[];Object.keys(TALK).forEach(st=>{if(!byId[st])return;TALK[st].forEach((T,ti)=>{const h=progress(st).read.has(ti);T.quiz.quiz.forEach((x,j)=>{const k=`${st}:${ti}:${j}`;all.push(k);if(h)heard.push(k)})})});
+  const tk=k=>k.split(':').slice(0,2).join(':'),miss=shuffle(missKeys()).slice(0,2),base=heard.length>=30?heard:all,rest=shuffle(base.filter(k=>!miss.includes(k)));
+  const out=[];miss.forEach(k=>{if(!out.some(o=>tk(o)===tk(k)))out.push(k)});
+  for(const k of rest){if(out.length>=ROAD_HOUSES)break;if(!out.some(o=>tk(o)===tk(k)))out.push(k)}
+  for(const k of shuffle(all)){if(out.length>=ROAD_HOUSES)break;if(!out.some(o=>tk(o)===tk(k)))out.push(k)}return shuffle(out)}
+function roadDraw(c,type,x,y,w,h,t,sq){/* (x,y)=bottom-center */const ink='#1C2433';c.save();c.translate(x,y);if(sq){c.scale(1+sq*.5,1-sq*.6)}c.lineWidth=2.4;c.strokeStyle=ink;c.lineJoin='round';
+  const eyes=(ex,ey,sl)=>{c.fillStyle=ink;if(sl){c.lineWidth=2;c.beginPath();c.moveTo(ex-7,ey);c.lineTo(ex-3,ey);c.moveTo(ex+3,ey);c.lineTo(ex+7,ey);c.stroke();c.lineWidth=2.4}else{c.beginPath();c.arc(ex-5,ey,2.2,0,7);c.arc(ex+5,ey,2.2,0,7);c.fill()}};
+  const label=(s,ly,col,sz)=>{c.fillStyle=col||ink;c.font=`bold ${sz||11}px ${ROAD.font}`;c.textAlign='center';c.textBaseline='middle';c.fillText(s,0,ly)};
+  const rr=(x0,y0,w0,h0,r)=>{c.beginPath();c.roundRect?c.roundRect(x0,y0,w0,h0,r):c.rect(x0,y0,w0,h0)};
+  if(type==='salt'){rr(-13,-30,26,30,6);c.fillStyle='#FFFFFF';c.fill();c.stroke();c.beginPath();c.moveTo(-13,-28);c.quadraticCurveTo(0,-46,13,-28);c.closePath();c.fillStyle='#A9B4C6';c.fill();c.stroke();
+    c.fillStyle=ink;[[-5,-35],[0,-38],[5,-35]].forEach(([a,b])=>{c.beginPath();c.arc(a,b,1.3,0,7);c.fill()});eyes(0,-20);label('塩',-8,'#1C2433',10)}
+  else if(type==='smoke'){c.fillStyle='#C9CED8';c.beginPath();c.arc(-9,-12,10,0,7);c.arc(8,-13,11,0,7);c.arc(0,-23,11,0,7);c.fill();c.beginPath();c.arc(-9,-12,10,2.2,5.4);c.stroke();c.beginPath();c.arc(8,-13,11,-1.6,1.9);c.stroke();c.beginPath();c.arc(0,-23,11,3.4,6.0);c.stroke();
+    c.beginPath();c.moveTo(-18,-4);c.lineTo(18,-4);c.stroke();eyes(0,-15);c.lineWidth=2;c.beginPath();c.moveTo(-9,-21);c.lineTo(-3,-19);c.moveTo(9,-21);c.lineTo(3,-19);c.stroke()}
+  else if(type==='sofa'){c.fillStyle='#B49BE0';c.beginPath();c.ellipse(0,-11,19,11,0,0,7);c.fill();c.stroke();eyes(-2,-12,true);c.fillStyle=ink;c.font=`bold 10px ${ROAD.font}`;c.textAlign='left';c.fillText('z',11,-26+Math.sin(t*3)*2);c.fillText('z',16,-33+Math.sin(t*3+1)*2)}
+  else if(type==='sugar'){c.save();c.rotate(Math.sin(t*6)*.08);rr(-14,-28,28,28,4);c.fillStyle='#FFD3E2';c.fill();c.stroke();eyes(0,-19);label('糖',-8,'#1C2433',10);c.restore();c.fillStyle='#fff';c.beginPath();c.arc(-17,-31,2,0,7);c.arc(16,-25,1.6,0,7);c.fill()}
+  else if(type==='night'){const f=Math.sin(t*14)*5;c.fillStyle='#E9EEF7';c.beginPath();c.ellipse(-16,-16-f,8,4,-.5,0,7);c.fill();c.stroke();c.beginPath();c.ellipse(16,-16-f,8,4,.5,0,7);c.fill();c.stroke();
+    c.fillStyle='#34407A';c.beginPath();c.arc(0,-14,13,0,7);c.fill();c.stroke();c.fillStyle='#F6D365';c.beginPath();c.arc(4,-27,6,0,7);c.fill();c.stroke();c.fillStyle='#34407A';c.beginPath();c.arc(7,-29,5,0,7);c.fill();
+    c.strokeStyle='#fff';c.lineWidth=2;c.beginPath();c.moveTo(-7,-14);c.lineTo(-2,-14);c.moveTo(2,-14);c.lineTo(7,-14);c.stroke()}
+  else if(type==='stress'){c.fillStyle='#F28C38';c.beginPath();const n=9;for(let i=0;i<n*2;i++){const a=i/n/2*Math.PI*2+t*1.5,r=i%2?10:16;c.lineTo(Math.cos(a)*r,-16+Math.sin(a)*r)}c.closePath();c.fill();c.stroke();
+    c.lineWidth=2;c.beginPath();c.moveTo(-7,-20);c.lineTo(-2,-17);c.moveTo(7,-20);c.lineTo(2,-17);c.stroke();eyes(0,-14);c.lineWidth=2;c.beginPath();c.moveTo(-4,-9);c.lineTo(4,-9);c.stroke()}
+  c.restore()}
+function roadIcon(type){const cv=document.createElement('canvas');cv.width=96;cv.height=96;const c=cv.getContext('2d');c.scale(2,2);roadDraw(c,type,24,44,0,0,.3);return cv.toDataURL()}
+const ROAD={font:'sans-serif',icons:null};
+function openRoad(opt){opt=opt||{};if(document.querySelector('.road'))return;
+  const scr=document.getElementById('screen');try{ROAD.font=getComputedStyle(scr).fontFamily||'sans-serif'}catch(e){}
+  if(!ROAD.icons){ROAD.icons={};Object.keys(ROAD_EN).forEach(k=>ROAD.icons[k]=roadIcon(k))}
+  const navi=new Image();navi.src=(typeof NAVI_FACE!=='undefined'&&NAVI_FACE.idle.c)||'';const naviH=new Image();naviH.src=(typeof NAVI_FACE!=='undefined'&&NAVI_FACE.happy&&NAVI_FACE.happy.c)||navi.src;
+  const p=document.createElement('div');p.className='road';
+  p.innerHTML=`<div class="pn-top"><button class="back" type="button" data-close>‹ やめる</button><b>ナビの訪問ロード</b></div>
+   <div class="rd-game"><canvas></canvas><div class="rd-hud"><span class="rd-hs"></span><span class="rd-sc"></span></div><div class="rd-pop" hidden></div></div>
+   <div class="rd-low"></div>`;
+  scr.appendChild(p);requestAnimationFrame(()=>requestAnimationFrame(()=>p.classList.add('on')));helper.classList.add('away');
+  const game=p.querySelector('.rd-game'),cv=game.querySelector('canvas'),c=cv.getContext('2d'),low=p.querySelector('.rd-low'),pop=p.querySelector('.rd-pop');
+  let W=360,H=360,k=1,G=0;
+  function size(){const sw=p.clientWidth||360,sh=p.clientHeight||700,top=p.querySelector('.pn-top').offsetHeight||48;
+    const gh=Math.round(Math.max(250,Math.min(sw*1.02,sh-top-300)));game.style.height=gh+'px';const dpr=Math.min(2,window.devicePixelRatio||1);
+    cv.width=Math.round(sw*dpr);cv.height=Math.round(gh*dpr);cv.style.width=sw+'px';cv.style.height=gh+'px';k=sw/330;W=330;H=gh/k;G=H-56;c.setTransform(dpr*k,0,0,dpr*k,0,0)}
+  size();
+  /* ---- course ---- */
+  const SPEED=150,GRAV=1750,JV=610;
+  let keys=[],solids=[],plats=[],ens=[],houses=[],bridges=[];
+  function build(){solids=[];plats=[];ens=[];houses=[];bridges=[];let x=-400,s0=x;const R=Math.random;x=360;
+    const walkers=['salt','smoke','sofa','sugar'];
+    for(let i=0;i<ROAD_HOUSES;i++){const n=3+Math.min(i,3);let last='';
+      for(let j=0;j<n;j++){x+=190+R()*90;let ty=['pit','walk','walk','fly','hop','plat','pit'][Math.floor(R()*7)];if(ty===last&&ty==='pit')ty='walk';if(i===0&&j===0)ty='walk';last=ty;
+        if(ty==='pit'){const w=50+Math.min(i,4)*5+R()*12;solids.push([s0,x]);s0=x+w;x+=w}
+        else if(ty==='walk'){const t=walkers[Math.floor(R()*walkers.length)];ens.push({t,x,x0:x-45,x1:x+45,vx:-(18+R()*14),y:0,w:28,h:30,alive:1})}
+        else if(ty==='fly')ens.push({t:'night',x,bx:x,y:0,w:28,h:26,alive:1,ph:R()*6})
+        else if(ty==='hop')ens.push({t:'stress',x,x0:x-30,x1:x+30,vx:-20,y:0,vy:0,w:30,h:30,alive:1})
+        else{plats.push({x0:x-20,x1:x+90,y:66});ens.push({t:walkers[Math.floor(R()*4)],x:x+35,x0:x-10,x1:x+80,vx:-20,y:0,w:28,h:30,alive:1});x+=90}}
+      x+=260;houses.push({x,key:keys[i],done:0,roof:['#E46B5B','#4F7FD9','#3E9B5F','#E59A1A','#8A63D2'][i%5]});x+=230}
+    solids.push([s0,x+800]);ROAD.end=x}
+  /* ---- state ---- */
+  const S={mode:'intro',x:40,y:0,vy:0,gr:true,coy:0,buf:0,hold:false,inv:0,stun:0,cam:0,t:0,leg:0,ok:0,stomp:{},falls:0,bump:0,fallAt:{},face:'idle',quizAt:0};
+  const rec=[];
+  function surf(x0,x1,prevB,b){let best=null;for(const s of solids)if(x1>s[0]&&x0<s[1]){if(prevB<=G+1&&b>=G-0.01)best=G}
+    for(const s of bridges)if(x1>s[0]&&x0<s[1]){if(prevB<=G+1&&b>=G-0.01)best=G}
+    for(const q of plats)if(x1>q.x0&&x0<q.x1){const yy=G-q.y;if(prevB<=yy+1&&b>=yy-0.01)best=best==null?yy:Math.min(best,yy)}return best}
+  const onSolid=(x0,x1)=>solids.some(s=>x1>s[0]&&x0<s[1])||bridges.some(s=>x1>s[0]&&x0<s[1]);
+  function jump(){if(S.mode!=='run')return;S.buf=.13;S.hold=true}
+  function release(){S.hold=false}
+  function say(html,ms){pop.innerHTML=html;pop.hidden=false;pop.classList.remove('in');void pop.offsetWidth;pop.classList.add('in');clearTimeout(say.t);say.t=setTimeout(()=>{pop.hidden=true},ms||1900)}
+  function hud(){p.querySelector('.rd-hs').innerHTML=houses.map((h,i)=>`<i class="${h.done?'done':i===S.leg&&S.mode!=='end'?'cur':''}">${h.done?'✓':i+1}</i>`).join('');p.querySelector('.rd-sc').innerHTML=`正解 <b>${S.ok}</b>`}
+  function lowRun(){const tot=Object.values(S.stomp).reduce((a,b)=>a+b,0);
+    low.innerHTML=`<div class="rd-run"><div class="rd-go"><b>${S.leg+1}軒目</b>のお客さまの家へ向かっています</div><div class="rd-how"><span class="rd-tap">タップ</span>画面のどこでもジャンプ。長く押すと高く跳べます。</div>
+      <div class="rd-legend">${Object.keys(ROAD_EN).map(t=>`<span class="${S.stomp[t]?'got':''}"><img src="${ROAD.icons[t]}" alt=""><b>${ROAD_EN[t].name}</b>${S.stomp[t]?`<em>×${S.stomp[t]}</em>`:''}</span>`).join('')}</div>
+      <p class="rd-note">健康リスクは、上から踏むとやっつけられます。${tot?`ここまで <b>${tot}</b>こ やっつけました。`:''}</p></div>`}
+  function intro(){const r=REC.road;S.mode='intro';hud();
+    low.innerHTML=`<div class="rd-intro"><h3>お客さまの家を${ROAD_HOUSES}軒まわろう</h3><p>ナビが町を走ります。家に着くと、お客さまが<b>1つ質問</b>してきます。答えたら次のお客さまへ。まちがえたら、寄り道して先生の説明を見ていこう。</p>
+      <p>道には<b>健康リスク</b>がいます。ジャンプして上から踏むと、やっつけられます。落とし穴に落ちても、手前からやり直せます。</p>
+      <div class="rd-legend">${Object.keys(ROAD_EN).map(t=>`<span><img src="${ROAD.icons[t]}" alt=""><b>${ROAD_EN[t].name}</b></span>`).join('')}</div>
+      ${r&&r.runs?`<p class="rd-rec">これまで：<b>${r.houses}</b>軒を訪問・正解 <b>${r.ok}</b>問（${r.runs}回）</p>`:''}
+      <button class="btn go wide" type="button" data-start>出発する</button></div>`;
+    low.querySelector('[data-start]').addEventListener('click',e=>{e.stopPropagation();start()})}
+  function start(){keys=roadPool();build();Object.assign(S,{mode:'run',x:40,y:G,vy:0,gr:true,inv:0,stun:0,cam:0,leg:0,ok:0,stomp:{},falls:0,bump:0,fallAt:{},face:'idle'});rec.length=0;hud();lowRun();say('<b>出発！</b><small>タップでジャンプ</small>',1400)}
+  /* ---- input ---- */
+  const down=e=>{if(S.mode!=='run')return;if(e.target.closest('button,a,.mo-ov'))return;e.preventDefault();jump()};
+  p.addEventListener('pointerdown',down);p.addEventListener('pointerup',release);p.addEventListener('pointercancel',release);
+  const kd=e=>{if(e.code==='Space'||e.code==='ArrowUp'){if(S.mode==='run'){e.preventDefault();if(!e.repeat)jump()}}},ku=e=>{if(e.code==='Space'||e.code==='ArrowUp')release()};
+  document.addEventListener('keydown',kd);document.addEventListener('keyup',ku);
+  /* ---- step ---- */
+  function step(dt){S.t+=dt;if(S.mode!=='run')return;
+    S.inv=Math.max(0,S.inv-dt);S.buf=Math.max(0,S.buf-dt);S.coy=S.gr?.09:Math.max(0,S.coy-dt);
+    let vx=SPEED;if(S.stun>0){S.stun-=dt;vx=S.stun>.25?-110:0}
+    const below=S.y>G+4&&!S.gr;if(below)vx=0;
+    if(S.buf>0&&S.coy>0){S.vy=-JV;S.gr=false;S.coy=0;S.buf=0;SFX.play('board')}
+    if(!S.hold&&S.vy<-260)S.vy=-260;
+    const prevB=S.y;S.vy=Math.min(S.vy+GRAV*dt,900);S.y+=S.vy*dt;S.x+=vx*dt;
+    const x0=S.x-12,x1=S.x+12;let land=null;if(S.vy>=0){land=surf(x0,x1,prevB,S.y)}
+    if(land!=null){S.y=land;S.vy=0;S.gr=true}else S.gr=false;
+    if(S.gr&&S.y===G&&!onSolid(x0,x1)){S.gr=false}
+    if(S.gr&&S.y<G&&!plats.some(q=>x1>q.x0&&x0<q.x1&&Math.abs(G-q.y-S.y)<1))S.gr=false;
+    if(S.y>H+60){fall();return}
+    /* enemies */
+    for(const e of ens){if(!e.alive){e.sq=(e.sq||0)+dt;continue}
+      if(e.t==='night'){e.y=48+Math.sin(S.t*2.2+e.ph)*20;e.x=e.bx+Math.sin(S.t*.9+e.ph)*24}
+      else{e.x+=e.vx*dt;if(e.x<e.x0){e.x=e.x0;e.vx=-e.vx}if(e.x>e.x1){e.x=e.x1;e.vx=-e.vx}if(e.t==='stress'){e.vy=(e.vy||0)+GRAV*.6*dt;e.y-=e.vy*dt;if(e.y<=0){e.y=0;e.vy=-330}}}
+      if(Math.abs(e.x-S.x)>200)continue;
+      const ey=G-e.y,et=ey-e.h,nb=S.y,nt=S.y-40;
+      if(S.x+12>e.x-e.w/2&&S.x-12<e.x+e.w/2&&nb>et&&nt<ey){
+        if(S.vy>0&&prevB<=et+12){e.alive=0;e.sq=0;S.vy=-430;S.gr=false;S.stomp[e.t]=(S.stomp[e.t]||0)+1;SFX.play('ok');const d=ROAD_EN[e.t];say(`<b>${d.name}</b>をやっつけた！<small>${d.tip}</small>`);lowRun()}
+        else if(!S.inv){S.inv=1.3;S.stun=.45;S.bump++;S.vy=Math.min(S.vy,-200);S.gr=false;SFX.play('nope');say(`いたた… <b>${ROAD_EN[e.t].name}</b>にぶつかった<small>上から踏むと、やっつけられるよ</small>`,1600)}}}
+    /* houses */
+    const h=houses[S.leg];if(h&&S.x>=h.x+8&&S.gr){S.x=h.x+8;arrive(h)}
+  }
+  function fall(){S.falls++;let gx=null;for(const s of solids)if(s[1]<=S.x+12&&s[1]>S.x-200)gx=s[1];if(gx==null)gx=S.x-60;
+    const n=S.fallAt[gx]=(S.fallAt[gx]||0)+1;let msg='落とし穴！ 手前からもう一度';
+    if(n>=2&&!bridges.some(b=>b[0]===gx)){const nx=solids.find(s=>s[0]>gx);if(nx){bridges.push([gx,nx[0]]);msg='板をかけたよ。ゆっくり渡ろう'}}
+    S.x=gx-70;S.y=G;S.vy=0;S.gr=true;S.inv=1.2;S.stun=0;S.cam=S.x-96;SFX.play('ng');say(msg,1700)}
+  function arrive(h){S.mode='quiz';S.vy=0;SFX.play('arrive');const key=h.key,[st,ti,qi]=key.split(':'),s=byId[st];useFaces(st);
+    h.cust=new Image();h.cust.src=F1('c','idle');setTimeout(()=>quiz(h),RM?0:450)}
+  function quiz(h){const key=h.key,[st,ti,qi]=key.split(':'),s=byId[st],q=qOf(key);if(!q){next();return}
+    const [qq,ch,ans,cmt,cq]=q,T=TALK[st][+ti];h.cust.src=F1('c','ask');hud();
+    const order=shuffle(ch.map((t,i)=>i));
+    low.innerHTML=`<div class="rd-q" style="--c:var(${s.line})"><div class="rd-qh"><b>${S.leg+1}軒目のお客さま</b><span>${esc(s.name)}「${esc(T.t)}」から</span></div>
+      <div class="rd-ask"><img src="${F1('c','ask')}" alt=""><div class="rd-bub">${rich(cq||qq)}</div></div>
+      <div class="qc">${order.map((i,j)=>`<button type="button" data-i="${i}" style="--i:${j}">${rich(ch[i])}</button>`).join('')}</div></div>`;
+    low.scrollTop=0;
+    low.querySelectorAll('.qc button').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();answer(+b.dataset.i,b)}));
+    function answer(i,b){const ok=i===ans;missUpd(key,ok);recAns(st,ok);if(ok)S.ok++;h.done=1;rec.push({key,ok});SFX.play(ok?'ok':'ng');
+      low.querySelectorAll('.qc button').forEach(x=>{const kk=+x.dataset.i;x.disabled=true;if(kk===ans)x.classList.add('ok');else if(x===b)x.classList.add('ng');else x.classList.add('dim')});
+      const face=F1('c',ok?'happy':'worry');low.querySelector('.rd-ask img').src=face;h.cust.src=face;
+      low.querySelector('.rd-bub').innerHTML=ok?pick(['なるほど、よくわかったわ！','そうなのね。安心したわ。','説明がわかりやすいわ。ありがとう。']):pick(['あら、そうなの…？','うーん、ちょっと心配だわ。','本当にそうかしら…。']);
+      const sg=T.segs?segOf(st,+ti,+qi):0,MO=(moreOf(st,+ti)||[])[sg],last=S.leg+1>=ROAD_HOUSES;
+      const f=document.createElement('div');f.className='vs-memo '+(ok?'good':'bad');
+      f.innerHTML=`<img src="${F1('t',ok?'good':'caution',false)}" alt=""><div><b>${ok?'正解！':'先生のメモ'}</b>${ok?'':`<span class="vs-ans">正しい答え：${rich(ch[ans])}</span>`}${rich(cmt)}</div>`;
+      const nv=document.createElement('div');nv.className='rd-nv';nv.innerHTML=`<img src="${ok?naviH.src:navi.src}" alt=""><span>${ok?(last?'これで最後の家だよ。おつかれさま！':'正解！ 次のお客さまのところへ行こう！'):MO?'ちょっと<b>寄り道</b>して、先生の説明を見ていこう。':'先生のメモを読んでから、次へ行こう。'}</span>`;
+      const bt=document.createElement('div');bt.className='rd-bt';
+      const goTxt=last?'結果を見る':'次のお客さまへ';
+      bt.innerHTML=!ok&&MO?`<button class="btn go wide" type="button" data-more>寄り道する（もっと詳しく）</button><button class="btn ghost wide" type="button" data-next>このまま${goTxt}</button>`:`<button class="btn go wide" type="button" data-next>${goTxt}</button>`;
+      const box=low.querySelector('.rd-q');box.appendChild(f);box.appendChild(nv);box.appendChild(bt);
+      bt.querySelector('[data-next]').addEventListener('click',e=>{e.stopPropagation();next()});
+      const mb=bt.querySelector('[data-more]');if(mb)mb.addEventListener('click',e=>{e.stopPropagation();openMore(p,T.t,T.segs[sg],MO,`${sg+1}/${T.segs.length}`,()=>{bt.innerHTML=`<button class="btn go wide" type="button" data-next>${goTxt}</button>`;bt.querySelector('[data-next]').addEventListener('click',e=>{e.stopPropagation();next()})});
+        const fb=p.querySelector('.mo-ov:last-child .mo-foot .btn');if(fb)fb.textContent='閉じる（訪問ロードにもどる）'});
+      requestAnimationFrame(()=>bt.scrollIntoView({block:'nearest',behavior:RM?'auto':'smooth'}))}}
+  function next(){S.leg++;hud();if(S.leg>=ROAD_HOUSES){finish(true);return}S.mode='run';S.inv=.6;lowRun();say(`<b>${S.leg+1}軒目</b>へ出発！`,1100)}
+  let saved=false;
+  function save(){if(saved||!rec.length)return;saved=true;const r=REC.road||(REC.road={runs:0,houses:0,ok:0,stomp:0,best:0});const st=Object.values(S.stomp).reduce((a,b)=>a+b,0);
+    r.runs++;r.houses+=rec.length;r.ok+=S.ok;r.stomp+=st;r.best=Math.max(r.best,S.ok);r.at=Date.now();
+    recLog({k:'road',st:'home',t:'ナビの訪問ロード',sc:S.ok,n:rec.length,pass:S.ok>=Math.ceil(rec.length*.8)});recSave()}
+  function finish(){S.mode='end';hud();save();SFX.play(S.ok>=4?'pass':'arrive');const st=Object.entries(S.stomp),tot=st.reduce((a,b)=>a+b[1],0),r=REC.road;
+    low.innerHTML=`<div class="rd-end"><div class="rd-e1"><img src="${naviH.src}" alt=""><div><b>今日の訪問、おつかれさま！</b><small>${S.ok>=4?'お客さまの質問に、しっかり答えられたね。':S.ok>=2?'まちがえた問題は、家の「間違えた問題を解き直す」に入ったよ。':'寄り道した説明を思い出して、また回ってみよう。'}</small></div></div>
+      <div class="hm-stats"><div><b>${rec.length}<small>軒</small></b><span>進んだ軒数</span></div><div><b>${S.ok}<small>/${rec.length}</small></b><span>正解数</span></div><div><b>${tot}<small>こ</small></b><span>やっつけた<br>健康リスク</span></div></div>
+      ${tot?`<div class="rd-legend">${st.map(([t,n])=>`<span class="got"><img src="${ROAD.icons[t]}" alt=""><b>${ROAD_EN[t].name}</b><em>×${n}</em></span>`).join('')}</div>`:''}
+      <ul class="rd-list">${rec.map((x,i)=>{const [a,b]=x.key.split(':'),T=TALK[a][+b];return `<li class="${x.ok?'ok':'ng'}"><i>${x.ok?'○':'×'}</i><span>${i+1}軒目　${esc(byId[a].name)}「${esc(T.t)}」</span></li>`}).join('')}</ul>
+      <p class="rd-rec">これまでの合計：<b>${r.houses}</b>軒を訪問・正解 <b>${r.ok}</b>問（${r.runs}回）。自宅の記録に残りました。</p>
+      <div class="btns"><button class="btn ghost" type="button" data-again>もう一度まわる</button><button class="btn go" type="button" data-x>おわる</button></div></div>`;
+    low.scrollTop=0;low.querySelector('[data-again]').addEventListener('click',e=>{e.stopPropagation();saved=false;start()});low.querySelector('[data-x]').addEventListener('click',e=>{e.stopPropagation();close()})}
+  const pick=a=>a[Math.floor(Math.random()*a.length)];
+  /* ---- draw ---- */
+  const hsh=n=>{n=Math.sin(n*127.1)*43758.5453;return n-Math.floor(n)};
+  function draw(){const cam=S.cam,ink='#1C2433';c.clearRect(0,0,W,H);
+    const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#CFE6FB');g.addColorStop(1,'#F2F8FE');c.fillStyle=g;c.fillRect(0,0,W,H);
+    c.fillStyle='#FFF4C8';c.beginPath();c.arc(300,H*.16,22,0,7);c.fill();
+    /* clouds */
+    c.fillStyle='#fff';for(let i=-1;i<4;i++){const base=Math.floor(cam*.1/160)+i,cx=base*160-cam*.1+hsh(base)*60,cy=H*.12+hsh(base+9)*H*.18;c.beginPath();c.arc(cx,cy,14,0,7);c.arc(cx+16,cy-6,17,0,7);c.arc(cx+34,cy,13,0,7);c.fill()}
+    /* far town */
+    for(let i=-1;i<9;i++){const base=Math.floor(cam*.3/52)+i,bx=base*52-cam*.3,bh=50+hsh(base)*70,bw=40+hsh(base+3)*10;c.fillStyle=hsh(base+5)>.5?'#C5D6EC':'#B7CBE5';c.fillRect(bx,G-bh-6,bw,bh+6);
+      c.fillStyle='#E7EFFA';for(let r=0;r<Math.floor(bh/18);r++)for(let q=0;q<2;q++)c.fillRect(bx+7+q*16,G-bh+6+r*18,9,7)}
+    /* trees */
+    for(let i=-1;i<6;i++){const base=Math.floor(cam*.6/90)+i,tx=base*90-cam*.6+hsh(base+11)*40;if(hsh(base+2)<.35)continue;c.fillStyle='#9C7A55';c.fillRect(tx-3,G-30,6,30);c.fillStyle=hsh(base)>.5?'#8CCB8E':'#76BC86';c.beginPath();c.arc(tx,G-38,17,0,7);c.fill()}
+    /* ground */
+    const gs=[...solids.map(s=>[s[0],s[1],0]),...bridges.map(s=>[s[0],s[1],1])];
+    for(const [a,b,br] of gs){const x0=a-cam,x1=b-cam;if(x1<-10||x0>W+10)continue;
+      if(br){c.fillStyle='#C9965E';c.fillRect(x0,G,x1-x0,9);c.strokeStyle=ink;c.lineWidth=2;c.strokeRect(x0,G,x1-x0,9);continue}
+      c.fillStyle='#F0E2C2';c.fillRect(x0,G+12,x1-x0,H-G);c.fillStyle='#7CC67E';c.fillRect(x0,G,x1-x0,12);c.strokeStyle=ink;c.lineWidth=2.4;
+      c.beginPath();c.moveTo(x0,H+2);c.lineTo(x0,G);c.lineTo(x1,G);c.lineTo(x1,H+2);c.stroke();c.lineWidth=1.4;c.strokeStyle='rgba(28,36,51,.35)';c.beginPath();c.moveTo(x0,G+12);c.lineTo(x1,G+12);c.stroke();
+      c.strokeStyle='rgba(28,36,51,.14)';for(let tx=Math.ceil(a/40)*40;tx<b;tx+=40){c.beginPath();c.moveTo(tx-cam,G+20);c.lineTo(tx-cam,H);c.stroke()}}
+    /* platforms */
+    for(const q of plats){const x0=q.x0-cam,y=G-q.y;if(x0>W||x0+(q.x1-q.x0)<0)continue;c.fillStyle='#F6C85F';c.strokeStyle=ink;c.lineWidth=2.4;c.beginPath();c.roundRect?c.roundRect(x0,y,q.x1-q.x0,12,5):c.rect(x0,y,q.x1-q.x0,12);c.fill();c.stroke()}
+    /* houses */
+    houses.forEach((h,i)=>{const x0=h.x-cam-30;if(x0>W+20||x0<-180)return;const y=G,w=118,hh=70;c.strokeStyle=ink;c.lineWidth=2.4;
+      c.fillStyle='#FFF8EC';c.fillRect(x0,y-hh,w,hh);c.strokeRect(x0,y-hh,w,hh);
+      c.fillStyle=h.roof;c.beginPath();c.moveTo(x0-10,y-hh);c.lineTo(x0+w/2,y-hh-40);c.lineTo(x0+w+10,y-hh);c.closePath();c.fill();c.stroke();
+      c.fillStyle='#BFE0F7';c.fillRect(x0+14,y-50,30,22);c.strokeRect(x0+14,y-50,30,22);c.beginPath();c.moveTo(x0+14,y-39);c.lineTo(x0+44,y-39);c.lineWidth=1.6;c.stroke();c.lineWidth=2.4;
+      const dx=x0+66;c.fillStyle='#9B6B43';c.fillRect(dx,y-50,36,50);c.strokeRect(dx,y-50,36,50);
+      if(h.cust&&S.leg===i&&(S.mode==='quiz')&&h.cust.complete){c.save();c.beginPath();c.rect(dx+1,y-49,34,49);c.clip();c.fillStyle='#FFF1D6';c.fillRect(dx+1,y-49,34,49);c.drawImage(h.cust,dx-5,y-50,46,61);c.restore();c.strokeRect(dx,y-50,36,50)}
+      else{c.fillStyle='#F6D365';c.beginPath();c.arc(dx+7,y-24,2.6,0,7);c.fill()}
+      c.fillStyle='#fff';c.fillRect(x0+38,y-hh-24,42,17);c.strokeRect(x0+38,y-hh-24,42,17);c.fillStyle=ink;c.font=`bold 10px ${ROAD.font}`;c.textAlign='center';c.textBaseline='middle';c.fillText(h.done?'訪問済み':`${i+1}軒目`,x0+59,y-hh-15.5);
+      if(h.done){c.fillStyle='#3E9B5F';c.beginPath();c.arc(x0+w-6,y-hh-6,9,0,7);c.fill();c.strokeStyle='#fff';c.lineWidth=2.4;c.beginPath();c.moveTo(x0+w-10,y-hh-6);c.lineTo(x0+w-7,y-hh-3);c.lineTo(x0+w-2,y-hh-10);c.stroke()}});
+    /* enemies */
+    for(const e of ens){const ex=e.x-cam;if(ex<-40||ex>W+40)continue;if(!e.alive){if(e.sq>.5)continue;c.globalAlpha=1-e.sq*2;roadDraw(c,e.t,ex,G-e.y,0,0,S.t,.6);c.globalAlpha=1;continue}roadDraw(c,e.t,ex,G-e.y,0,0,S.t,0)}
+    /* navi */
+    const nx=S.x-cam,ny=S.y,run=S.mode==='run'&&S.gr&&S.stun<=0;if(S.inv>0&&Math.floor(S.inv*12)%2===0){}else{
+      c.save();c.translate(nx,ny);const bob=run?Math.abs(Math.sin(S.t*14))*3:Math.sin(S.t*3)*1.2;
+      c.fillStyle='rgba(28,36,51,.16)';if(S.y<=G+2){const sh=Math.max(.4,1-(G-ny)/120);c.beginPath();c.ellipse(0,G-ny+2,14*sh,3.5*sh,0,0,7);c.fill()}
+      if(run){c.fillStyle='#1C2433';const ph=S.t*14;c.beginPath();c.ellipse(-6+Math.sin(ph)*4,-2,5,3.2,0,0,7);c.ellipse(6-Math.sin(ph)*4,-2,5,3.2,0,0,7);c.fill()}
+      c.rotate(S.gr?0:Math.max(-.2,Math.min(.2,S.vy/2400)));const img=(S.mode==='quiz'||S.mode==='end')?naviH:navi;
+      if(img.complete&&img.naturalWidth)c.drawImage(img,-23,-52-bob,46,51);else{c.fillStyle='#8FD3F5';c.beginPath();c.arc(0,-24-bob,20,0,7);c.fill()}
+      if(!S.gr&&S.mode==='run'){c.strokeStyle='rgba(28,36,51,.35)';c.lineWidth=2;c.beginPath();c.moveTo(-26,-30);c.lineTo(-36,-30);c.moveTo(-24,-20);c.lineTo(-32,-20);c.stroke()}
+      c.restore()}
+  }
+  let raf=0,last=performance.now(),alive=true;
+  function loop(now){if(!alive)return;const dt=Math.min(.034,(now-last)/1000);last=now;if(!document.hidden){step(dt);S.cam+=((S.x-96)-S.cam)*Math.min(1,dt*(S.mode==='run'?9:4));draw()}raf=requestAnimationFrame(loop)}
+  function close(){if(S.mode==='run'||S.mode==='quiz')save();alive=false;cancelAnimationFrame(raf);document.removeEventListener('keydown',kd);document.removeEventListener('keyup',ku);window.removeEventListener('resize',size);
+    p.classList.remove('on');setTimeout(()=>p.remove(),RM?0:420);if(!scene.classList.contains('on'))helper.classList.remove('away');hudUpd();opt.onExit&&opt.onExit()}
+  window.addEventListener('resize',size);
+  p.querySelector('[data-close]').addEventListener('click',e=>{e.stopPropagation();close()});
+  keys=roadPool();build();S.y=G;intro();raf=requestAnimationFrame(loop);
+  return {S,start,close,jump,release,step:(n)=>{for(let i=0;i<n;i++)step(1/60);draw()},houses:()=>houses,dbg:()=>({solids,ens,plats,bridges,G,ans:houses[S.leg]&&qOf(houses[S.leg].key)[2]}),arrive:()=>{const h=houses[S.leg];S.x=h.x+8;S.y=G;S.cam=S.x-96;arrive(h)}};
+}
+window.openRoad=openRoad;
+/* ROAD END */
 function leaveScene(){SCENE_HL=null;scene.querySelectorAll('.ask .hl').forEach(b=>b.classList.remove('hl'));clearInterval(typing);scene.classList.remove('on');scene.setAttribute('aria-hidden','true');helper.classList.remove('away');toast.classList.remove('on')}
 let tt;function showToast(t){toast.textContent=t;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),2600)}
 
