@@ -88,7 +88,11 @@ h1{font-size:clamp(22px,4vw,28px);font-weight:800;margin:0;line-height:1.35;text
 .nv-txt b{color:var(--l3)}
 .nv-go{flex:none;font-size:11px;color:#fff;background:var(--blue);border-radius:999px;padding:4px 8px;opacity:0;transition:opacity .25s}
 .nv-bub.link .nv-go{opacity:1}
-.nv-bub:not(.link){cursor:default}
+.nv-bub:not(.link):not(.hint){cursor:default}
+.nv-tap{position:absolute;right:-6px;top:-4px;z-index:2;font-size:10px;font-weight:800;color:#fff;background:#F26B5B;border:2px solid #fff;border-radius:999px;padding:1px 6px;pointer-events:none;animation:nvtap 1.4s ease-in-out infinite}
+@keyframes nvtap{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+@media (prefers-reduced-motion:reduce){.nv-tap{animation:none}}
+
 .nv-bub.swap .nv-txt{animation:nvin .3s ease-out}
 @keyframes nvin{from{opacity:0;transform:translateY(4px)}}
 .learn .lt{font-style:normal}
@@ -896,12 +900,43 @@ const NAVI_TIPS=[
  {t:'**骨粗しょう症**の人は、転ぶと骨折しやすいって知ってる？',st:'seikei',i:2},
  {t:'**子宮筋腫**って、どのくらい多い病気か知ってる？',st:'josei',i:1},
  {t:'**薬の名前**から、病気がわかることがあるって知ってる？',st:'yaku',i:1},
- {t:'**うつ病**で休職するとき、どれくらい通院するか知ってる？',st:'kokoro',i:2}];
+ {t:'**うつ病**で休職するとき、どれくらい通院するか知ってる？',st:'kokoro',i:2},
+ {t:'**営業に話しても**、告知したことにはならないって知ってる？',st:'hq',i:0},
+ {t:'**部位不担保**なら、ほかの部分は通常どおり保障されるって知ってる？',st:'hq',i:3},
+ {t:'告知義務違反でも、**関係がない支払い**は行われるって知ってる？',st:'hq',i:4},
+ {t:'会社員が働けないときの「**傷病手当金**」って知ってる？',st:'hq',i:1},
+ {t:'心筋梗塞は、**激しい痛みが15分以上**続くって知ってる？',st:'nai',i:1},
+ {t:'脳血管疾患の入院は**平均約69日**。全体の2倍以上って知ってる？',st:'nai',i:2},
+ {t:'1日の患者さんは、**外来が入院の約6倍**って知ってる？',st:'nai',i:3},
+ {t:'入院日数は**全体で平均約28日**。病気で大きく違うって知ってる？',st:'byo',i:0},
+ {t:'高額療養費は**月ごと**の計算。月をまたぐと負担が増えることもあるって知ってる？',st:'byo',i:2},
+ {t:'**カテーテル**で、心臓や脳の治療ができるって知ってる？',st:'geka',i:1},
+ {t:'「**日帰り入院**」と「**外来の手術**」は別ものって知ってる？',st:'geka',i:2},
+ {t:'**抜歯**は、手術給付金の対象外の商品が多いって知ってる？',st:'geka',i:3},
+ {t:'がんの**三大治療**って、何か知ってる？',st:'gan',i:1},
+ {t:'**ホルモン療法**は、5〜10年続けることがあるって知ってる？',st:'gan',i:2},
+ {t:'がんの約**3人に1人**は、20代〜60代って知ってる？',st:'gan',i:3},
+ {t:'**緩和ケア**は、診断されたときから受けられるって知ってる？',st:'gan',i:4},
+ {t:'骨折の治療で、**金属を抜く2回目の手術**があるって知ってる？',st:'seikei',i:0},
+ {t:'**整形外科**と**整骨院**の違い、知ってる？',st:'seikei',i:1},
+ {t:'リハビリには**期間の上限**の決まりがあるって知ってる？',st:'seikei',i:3},
+ {t:'乳がんは、女性の**約8人に1人**がかかるって知ってる？',st:'josei',i:0},
+ {t:'子宮頸がんの原因は「**HPV**」って知ってる？',st:'josei',i:2},
+ {t:'**帝王切開**は、公的医療保険の対象って知ってる？',st:'josei',i:3},
+ {t:'処方せんの有効期間は、**原則4日以内**って知ってる？',st:'yaku',i:0},
+ {t:'ジェネリックの使用割合は**約8割**って知ってる？',st:'yaku',i:2},
+ {t:'申込みのために**薬をやめちゃダメ**って知ってる？',st:'yaku',i:3},
+ {t:'うつ病は、**100人に約6人**がかかるって知ってる？',st:'kokoro',i:0},
+ {t:'大人の**約3割**に、不眠の症状があるって知ってる？',st:'kokoro',i:1},
+ {t:'心の病気の入院は長くて、**気分障害は約118日**って知ってる？',st:'kokoro',i:3},
+ {t:'先進医療は、**保険診療と一緒に**受けられるって知ってる？',st:'dai',i:0},
+ {t:'**陽子線治療**は、がんの種類で保険がきくこともあるって知ってる？',st:'dai',i:1},
+ {t:'保険診療と自由診療を組み合わせると、**ぜんぶ自己負担**って知ってる？',st:'dai',i:3},
+];/* NAVI_MIX */
 function naviCands(){const c=[],stn=ST.filter(x=>!x.home&&!x.random&&TALK[x.id]),all=[];stn.forEach(s=>TALK[s.id].forEach((T,i)=>all.push({s,i,T,k:talkStat(s.id,i).cls})));
   const due=dueList();if(due.length){const [st,ti]=due[0].split(':');c.push({t:`「**${TALK[st][+ti].t}**」のおさらいの時期だよ。家で5問、確かめよう！`,st:'home'})}
   const mk=missKeys();if(mk.length)c.push({t:`間違えた問題が**${mk.length}問**あるよ。家で解き直してみる？`,st:'home'});
   const tr=all.filter(x=>x.k==='try'||x.k==='read');if(tr.length){const x=tr[0];c.push({t:x.k==='try'?`「**${x.T.t}**」はあと少しで合格。もう一度挑戦してみる？`:`「**${x.T.t}**」は聞いたね。クイズに挑戦してみよう！`,st:x.s.id,i:x.i})}
-  NAVI_TIPS.filter(t=>talkStat(t.st,t.i).cls==='new').forEach(t=>c.push(t));
   const nw=all.filter(x=>x.k==='new');if(nw.length){const x=nw[Math.floor(Math.random()*nw.length)];c.push({t:`まだ聞いていない話：**${x.s.name}**の「${x.T.t}」。聞きに行こう！`,st:x.s.id,i:x.i})}
   if(readN()>=3)c.push({t:'聞いた話から、常連さんが**ランダムに10問**聞いてくれるよ。',st:'kyaku'});
   if(!c.length)return NAVI_TIPS.slice();return c}
@@ -925,21 +960,31 @@ const NAVI=(()=>{
       if(n>=plain.length){clearInterval(typ);txt.innerHTML=html;pose(p,false)}},45);
   }
   function kwNav(t){return esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')}
-  function next(){const c=naviCands();k=(k+1)%c.length;cur=c[k];render(cur.t,true)}
-  function top(){const c=naviCands();k=0;cur=c[0];render(cur.t,true)}
+  let seq=0,flip=0,deck=[];
+  const TAPK='mr-navi-tap';let tapped=false;try{tapped=localStorage.getItem(TAPK)==='1'}catch(e){}
+  const HINT='ぼくを**タップ**すると、今日のおすすめや進み具合を案内するよ！';
+  const mix=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+  function tip(){if(!deck.length){const nw=NAVI_TIPS.filter(t=>talkStat(t.st,t.i).cls==='new'),od=NAVI_TIPS.filter(t=>talkStat(t.st,t.i).cls!=='new');deck=mix(nw).concat(mix(od))}return deck.shift()}
+  function hint(){cur={hint:1};render(HINT,false);bub.classList.add('hint')}
+  function next(){seq++;bub.classList.remove('hint');
+    if(tapped?seq%12===0:seq%3===1)return hint();
+    flip^=1;if(flip){cur=tip();render(cur.t,true);return}
+    const c=naviCands();if(!c.length){cur=tip();render(cur.t,true);return}k=(k+1)%c.length;cur=c[k];render(cur.t,true)}
+  function top(){bub.classList.remove('hint');const c=naviCands();k=0;cur=c[0];render(cur.t,true)}
   function talk(t){cur=null;render(t,false)}
   function idle(){return menu.classList.contains('on')||helper.classList.contains('away')||busy||document.getElementById('title')?.getAttribute('aria-hidden')==='false'||document.hidden}
   function loop(){clearTimeout(timer);timer=setTimeout(()=>{if(!idle())next();loop()},9000)}
   const go=id=>{const s=byId[id];if(!s||!s.el||busy)return;SFX.play('tap');tapStation(s,s.el)};
-  bub.addEventListener('click',()=>{shut();if(!cur||busy)return;const s=byId[cur.st];if(!s||!s.el)return;NAVI_HL=cur.i!=null?{st:s.id,i:cur.i}:null;SFX.play('tap');tapStation(s,s.el)});
+  bub.addEventListener('click',e=>{if(cur&&cur.hint){e.stopPropagation();if(!busy)face.click();return}shut();if(!cur||busy)return;const s=byId[cur.st];if(!s||!s.el)return;NAVI_HL=cur.i!=null?{st:s.id,i:cur.i}:null;SFX.play('tap');tapStation(s,s.el)});
   const menu=document.createElement('div');menu.className='nv-menu';menu.setAttribute('role','menu');
   menu.innerHTML=`<button type="button" data-n="top">今日のおすすめは？</button><button type="button" data-n="prog">進み具合を教えて</button><button type="button" data-n="kyaku">常連さんに質問してもらう</button><button type="button" data-n="home">家で記録を見る</button><button type="button" data-n="next">ほかのひとこと</button>`;
   helper.appendChild(menu);
   function shut(){menu.classList.remove('on');face.setAttribute('aria-expanded','false')}
   menu.addEventListener('click',e=>{const b=e.target.closest('[data-n]');if(!b)return;e.stopPropagation();const n=b.dataset.n;shut();
     if(n==='top')top();else if(n==='prog')talk(naviProgress());else if(n==='next')next();else go(n);loop()});
-  face.addEventListener('click',e=>{e.stopPropagation();if(busy)return;const on=!menu.classList.contains('on');menu.classList.toggle('on',on);face.setAttribute('aria-expanded',on);SFX.play('tap');if(on)render('なにをしようか？',false),cur=null});
+  face.addEventListener('click',e=>{e.stopPropagation();if(busy)return;const on=!menu.classList.contains('on');menu.classList.toggle('on',on);face.setAttribute('aria-expanded',on);SFX.play('tap');if(!tapped){tapped=true;try{localStorage.setItem(TAPK,'1')}catch(e){}face.querySelector('.nv-tap')?.remove()}if(on)bub.classList.remove('hint'),render('なにをしようか？',false),cur=null});
   document.addEventListener('click',e=>{if(menu.classList.contains('on')&&!menu.contains(e.target)&&e.target!==face)shut()});
+  if(!tapped){const t=document.createElement('span');t.className='nv-tap';t.textContent='タップ';face.appendChild(t)}
   setTimeout(()=>{pose('idle',false);loop()},0);
   return {next,render};
 })();
@@ -3460,7 +3505,7 @@ document.getElementById('reset').addEventListener('click',()=>{showTitle();hideC
 <script id="mr-noscroll">(function(){var e=document.getElementById("screen");if(e)e.addEventListener("scroll",function(){if(e.scrollTop||e.scrollLeft){e.scrollTop=0;e.scrollLeft=0}})})();</script>
 
 <script id="mr-upd">(function(){
-var B="20261117-1412-ecff633a",bar=null,busy=false;
+var B="20261117-1413-a27f0d4c",bar=null,busy=false;
 function chk(){return fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){return j&&j.build&&j.build!==B?j.build:null}).catch(function(){return null})}
 function go(v){location.replace(location.pathname+'?v='+encodeURIComponent(v||Date.now()))}
 function show(v){if(bar)return;bar=document.createElement('div');bar.className='mr-upd';bar.setAttribute('role','status');
