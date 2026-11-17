@@ -121,12 +121,11 @@ h1{font-size:clamp(22px,4vw,28px);font-weight:800;margin:0;line-height:1.35;text
 .st.soon .tile{--c:#C9CFD9;background:repeating-linear-gradient(-45deg,#E3E7EE 0 6px,#EEF1F5 6px 12px);box-shadow:none;border:2px dashed var(--soon)}
 .st.soon .lab{color:#8A93A3}
 .st.lock .tile{filter:saturate(.25);opacity:.75}
-.st.hq .tile,.st.home .tile,.st.kyaku .tile{width:60px;height:52px;border-radius:14px}
+.st.hq .tile{width:60px;height:52px;border-radius:14px}
 .st.home .tile,.st.kyaku .tile{background:transparent!important;border:0;box-shadow:none}.st.home .tile img.art,.st.kyaku .tile img.art,.ictile img.art{width:100%;height:100%;object-fit:contain;filter:none}
 .ictile{background:transparent!important;border:0!important;box-shadow:none!important}
 .hm-ban{display:block;width:100%;aspect-ratio:16/8;object-fit:cover;border-radius:16px;margin-bottom:10px}
 .hm-act.ic{grid-template-columns:40px 1fr;column-gap:10px;align-items:center}.hm-act.ic>img{grid-row:1/3;width:40px;height:40px;object-fit:contain}.hm-act.ic b,.hm-act.ic span{grid-column:2}
-.st.kyaku .tile img{width:46px;height:auto;margin-top:6px}
 
 /* you */
 .you{position:absolute;left:0;top:0;width:0;height:0;z-index:2;pointer-events:none}
@@ -646,9 +645,9 @@ function pic(k,color){if(IMG[k])return `<img class="art${color&&color!=='#fff'?'
 
 /* stations: one entry per teacher; new teachers are added here */
 const ST=[
- {id:'home',x:88,y:1030,line:'--hm',name:'自宅',sub:'記録',who:'あなたの家',state:'new',home:true,
+ {id:'home',x:52,y:1030,line:'--hm',name:'自宅',sub:'記録',who:'あなたの家',state:'new',home:true,
   lead:'スタート地点のあなたの家です。聞いた話やクイズの成績、得意な分野・苦手な分野をここで見られます。間違えた問題の解き直しや、おさらいもここからできます。',jy:1030},
- {id:'kyaku',x:192,y:1030,line:'--ky',name:'お客さま',sub:'ランダム質問',who:'いろいろ聞いてくるお客さま',state:'new',random:true,
+ {id:'kyaku',x:228,y:1030,line:'--ky',name:'お客さま',sub:'ランダム質問',who:'いろいろ聞いてくるお客さま',state:'new',random:true,
   lead:'いろいろな先生の話から、ランダムに10問聞いてくるお客さまです。答えたあとに、その部分の話を聞きに行けます。',jy:1030},
  {id:'hq',x:140,y:890,line:'--hq',name:'保険会社',sub:'嘱託医',who:'保険会社の嘱託医',state:'new',
   lead:'スタート地点の保険会社にいる、嘱託医の先生です。お客さまの健康状態を聞くときの基本を教えてくれます。',
@@ -710,7 +709,7 @@ svg+=line([[140,750],[140,590]],'#4F5BD5');
 svg+=line([[52,750],[228,750]],'#0EA5A4');
 svg+=line([[140,890],[140,750]],'#0EA5A4');
 svg+=line([[140,1030],[140,890]],'#3E9B5F');
-svg+=line([[88,1030],[192,1030]],'#3E9B5F');svg+=`<circle cx="140" cy="1030" r="6" fill="#fff" stroke="#3E9B5F" stroke-width="3"/>`;
+svg+=line([[52,1030],[228,1030]],'#3E9B5F');svg+=`<circle cx="140" cy="1030" r="6" fill="#fff" stroke="#3E9B5F" stroke-width="3"/>`;
 [[140,750,'#0EA5A4'],[140,590,'#4F5BD5'],[140,430,'#E59A1A'],[140,270,'#8A63D2']].forEach(([x,y,c])=>{svg+=`<circle cx="${x}" cy="${y}" r="6" fill="#fff" stroke="${c}" stroke-width="3"/>`});
 svg+='</svg>';
 world.innerHTML=svg+`<div class="area" style="top:44px"><span>この先も、先生が増えていきます</span></div>`;
@@ -2194,7 +2193,7 @@ document.getElementById('reset').addEventListener('click',()=>{showTitle();hideC
 <script id="mr-noscroll">(function(){var e=document.getElementById("screen");if(e)e.addEventListener("scroll",function(){if(e.scrollTop||e.scrollLeft){e.scrollTop=0;e.scrollLeft=0}})})();</script>
 
 <script id="mr-upd">(function(){
-var B="20261117-1214-f4fea33b",bar=null,busy=false;
+var B="20261117-1222-0cd2b46b",bar=null,busy=false;
 function chk(){return fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){return j&&j.build&&j.build!==B?j.build:null}).catch(function(){return null})}
 function go(v){location.replace(location.pathname+'?v='+encodeURIComponent(v||Date.now()))}
 function show(v){if(bar)return;bar=document.createElement('div');bar.className='mr-upd';bar.setAttribute('role','status');
