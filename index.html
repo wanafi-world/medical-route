@@ -507,7 +507,7 @@ h1{font-size:clamp(22px,4vw,28px);font-weight:800;margin:0;line-height:1.35;text
 .title .kv{position:absolute;inset:0;background-size:auto calc(100% - 78px);background-repeat:no-repeat;background-position:center top;background-color:#B9E479}
 
 .t-body{position:relative;flex:1;display:flex;flex-direction:column;padding:54px 18px 18px;gap:10px}
-.eyebrow{font-size:10.5px;font-weight:800;letter-spacing:.16em;color:var(--blue)}
+.eyebrow{font-size:10.5px;line-height:1.6;font-weight:800;letter-spacing:.16em;color:var(--blue);text-shadow:0 1px 0 #fff,0 0 8px rgba(255,255,255,.95)}
 .logo{font-size:27px;white-space:nowrap;font-weight:800;line-height:1.15;letter-spacing:.02em;color:var(--ink);margin:0;text-shadow:0 2px 0 #fff,0 0 18px rgba(255,255,255,.9)}
 .logo span{display:block;font-size:13px;letter-spacing:.3em;color:var(--muted);font-weight:700;margin-top:4px}
 .catch{font-size:13px;line-height:1.7;color:var(--ink);margin:0;background:rgba(255,255,255,.75);border-radius:12px;padding:8px 10px;backdrop-filter:blur(4px)}
@@ -590,7 +590,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#F4F6FA;overscroll-beh
       </div>
       <div class="t-body">
         <div class="t-anim">
-          <div class="eyebrow">医療保険の営業研修ゲーム</div>
+          <div class="eyebrow">先生に聞いて、お客さまに答える<br>医療の学びアプリ</div>
           <h2 class="logo" id="logo">メディカル・ルート<span>医療のきほん路線図</span></h2>
           <p class="catch">先生たちに会いに行くたび、お客さまに聞かれる「病気・入院・手術・がん」のことが、ひとつずつ身につきます。</p>
         </div>
@@ -2193,7 +2193,7 @@ document.getElementById('reset').addEventListener('click',()=>{showTitle();hideC
 <script id="mr-noscroll">(function(){var e=document.getElementById("screen");if(e)e.addEventListener("scroll",function(){if(e.scrollTop||e.scrollLeft){e.scrollTop=0;e.scrollLeft=0}})})();</script>
 
 <script id="mr-upd">(function(){
-var B="20261117-1226-915b0296",bar=null,busy=false;
+var B="20261117-1248-d87a736d",bar=null,busy=false;
 function chk(){return fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){return j&&j.build&&j.build!==B?j.build:null}).catch(function(){return null})}
 function go(v){location.replace(location.pathname+'?v='+encodeURIComponent(v||Date.now()))}
 function show(v){if(bar)return;bar=document.createElement('div');bar.className='mr-upd';bar.setAttribute('role','status');
