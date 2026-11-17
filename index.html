@@ -39,7 +39,7 @@ h1{font-size:clamp(22px,4vw,28px);font-weight:800;margin:0;line-height:1.35;text
 .screen{
   --ink:#1C2433;--muted:#6B7486;--paper:#F4F6FA;--card:#FFFFFF;--blue:#2F6FEB;
   --l1:#0EA5A4;--l2:#4F5BD5;--l3:#F26B5B;--l4:#E59A1A;--l5:#8A63D2;--l6:#D9558C;--soon:#B8C0CC;--hq:#1C2433;--hm:#3E9B5F;--ky:#E07A3F;
-  position:relative;width:100%;height:100%;border-radius:30px;overflow:hidden;background:var(--paper);color:var(--ink);
+  position:relative;width:100%;height:100%;border-radius:30px;overflow:hidden;overflow:clip;background:var(--paper);color:var(--ink);
   font-family:var(--f-ui);display:flex;flex-direction:column;-webkit-tap-highlight-color:transparent;user-select:none;color-scheme:light}
 .hud{background:var(--card);padding:30px 14px 10px;display:flex;align-items:center;gap:8px;box-shadow:0 1px 0 #E3E7EE;z-index:3}
 .hud .lv{font-weight:800;font-size:13px;white-space:nowrap}
@@ -69,6 +69,9 @@ h1{font-size:clamp(22px,4vw,28px);font-weight:800;margin:0;line-height:1.35;text
 .helper{position:absolute;left:12px;right:12px;bottom:12px;z-index:4;background:var(--ink);color:#fff;border-radius:12px;padding:8px 12px;font-size:12px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 20px rgba(28,36,51,.25);transition:transform .35s cubic-bezier(.3,1.3,.5,1),opacity .25s}
 .helper.away{transform:translateY(140%);opacity:0}
 .helper.navi{background:none;box-shadow:none;padding:0;left:8px;right:10px;bottom:8px;align-items:flex-end;gap:4px;color:var(--ink)}
+.nv-menu{position:absolute;left:4px;bottom:84px;display:grid;gap:6px;min-width:200px;background:#fff;border:2px solid var(--ink);border-radius:14px;padding:8px;box-shadow:0 10px 24px rgba(28,36,51,.22);opacity:0;transform:translateY(8px) scale(.96);transform-origin:20px 100%;pointer-events:none;transition:opacity .18s,transform .22s cubic-bezier(.3,1.4,.5,1)}
+.nv-menu.on{opacity:1;transform:none;pointer-events:auto}
+.nv-menu button{font:inherit;font-size:13px;font-weight:700;text-align:left;color:var(--ink);background:#F3F6FA;border:0;border-radius:10px;padding:9px 12px;cursor:pointer}.nv-menu button:active{transform:scale(.97);background:#E3F4F3}
 .nv-face{flex:none;width:64px;height:72px;border:0;padding:0;background:none;cursor:pointer;position:relative;align-self:flex-end}
 .nv-face img{position:absolute;left:50%;bottom:-4px;width:72px;translate:-50% 0;pointer-events:none;filter:drop-shadow(0 3px 4px rgba(28,36,51,.18))}
 .nv-face.bob img{animation:nvbob .5s cubic-bezier(.3,1.5,.5,1)}
@@ -569,7 +572,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#F4F6FA;overscroll-beh
     <div class="hud"><span class="lv">合格 0/42話</span><span class="bar"><i></i></span><span class="ttl">聞いた 0</span><button class="help snd" id="snd" type="button" aria-label="音の設定" aria-haspopup="true" aria-expanded="false">⚙</button><button class="help" id="help" type="button" aria-label="遊び方を見る">?</button></div>
     <div class="setp" id="setp" role="dialog" aria-label="音の設定" hidden><div class="sp-h">音の設定</div><label class="sp-row"><span>効果音</span><input type="checkbox" id="optSfx"><i class="sw"></i></label><input class="sp-vol" type="range" id="volSfx" min="0" max="100" step="5" aria-label="効果音の音量"><label class="sp-row"><span>BGM</span><input type="checkbox" id="optBgm"><i class="sw"></i></label><input class="sp-vol" type="range" id="volBgm" min="0" max="100" step="5" aria-label="BGMの音量"><button type="button" class="sp-upd" id="spUpd">最新に更新</button><small class="sp-ver" id="spVer"></small></div>
     <div class="map" id="map"><div class="world" id="world"></div></div>
-    <div class="helper navi" id="helper"><button class="nv-face" id="nvFace" type="button" aria-label="ナビの次のひとこと"><span class="nv-ph">ナビ</span></button><button class="nv-bub" id="nvBub" type="button"><span class="nv-txt" id="nvTxt">行きたい先生の駅をタップしてね。</span><b class="nv-go" id="nvGo">見に行く ›</b></button></div>
+    <div class="helper navi" id="helper"><button class="nv-face" id="nvFace" type="button" aria-label="ナビのメニュー" aria-haspopup="menu" aria-expanded="false"><span class="nv-ph">ナビ</span></button><button class="nv-bub" id="nvBub" type="button"><span class="nv-txt" id="nvTxt">行きたい先生の駅をタップしてね。</span><b class="nv-go" id="nvGo">見に行く ›</b></button></div>
     <div class="scrim" id="scrim"></div>
     <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shWho"></div>
     <div class="scene" id="scene" aria-hidden="true"></div>
@@ -866,6 +869,17 @@ const NAVI_TIPS=[
  {t:'**子宮筋腫**って、どのくらい多い病気か知ってる？',st:'josei',i:1},
  {t:'**薬の名前**から、病気がわかることがあるって知ってる？',st:'yaku',i:1},
  {t:'**うつ病**で休職するとき、どれくらい通院するか知ってる？',st:'kokoro',i:2}];
+function naviCands(){const c=[],stn=ST.filter(x=>!x.home&&!x.random&&TALK[x.id]),all=[];stn.forEach(s=>TALK[s.id].forEach((T,i)=>all.push({s,i,T,k:talkStat(s.id,i).cls})));
+  const due=dueList();if(due.length){const [st,ti]=due[0].split(':');c.push({t:`「**${TALK[st][+ti].t}**」のおさらいの時期だよ。家で5問、確かめよう！`,st:'home'})}
+  const mk=missKeys();if(mk.length)c.push({t:`間違えた問題が**${mk.length}問**あるよ。家で解き直してみる？`,st:'home'});
+  const tr=all.filter(x=>x.k==='try'||x.k==='read');if(tr.length){const x=tr[0];c.push({t:x.k==='try'?`「**${x.T.t}**」はあと少しで合格。もう一度挑戦してみる？`:`「**${x.T.t}**」は聞いたね。クイズに挑戦してみよう！`,st:x.s.id,i:x.i})}
+  NAVI_TIPS.filter(t=>talkStat(t.st,t.i).cls==='new').forEach(t=>c.push(t));
+  const nw=all.filter(x=>x.k==='new');if(nw.length){const x=nw[Math.floor(Math.random()*nw.length)];c.push({t:`まだ聞いていない話：**${x.s.name}**の「${x.T.t}」。聞きに行こう！`,st:x.s.id,i:x.i})}
+  if(readN()>=3)c.push({t:'聞いた話から、お客さまが**ランダムに10問**聞いてくれるよ。',st:'kyaku'});
+  if(!c.length)return NAVI_TIPS.slice();return c}
+function naviProgress(){const tt=talkTotal(),ps=passedN(),rd=readN(),tot=Object.values(REC.ans).reduce((a,x)=>[a[0]+x[0],a[1]+x[1]],[0,0]),rate=tot[1]?Math.round(tot[0]/tot[1]*100):null;
+  const tail=ps>=tt?'全部の話に合格！ あとは、おさらいで忘れないようにしよう。':rd===0?'まずは1話、先生の話を聞いてみよう！':ps===0?'クイズに合格すると、ここが増えていくよ。':`あと**${tt-ps}話**で全部合格だよ。`;
+  return `合格は**${ps}/${tt}話**、聞いた話は**${rd}話**${rate!=null?`、正答率は**${rate}%**`:''}。${tail}`}
 const NAVI=(()=>{
   const face=document.getElementById('nvFace'),bub=document.getElementById('nvBub'),txt=document.getElementById('nvTxt');
   let k=-1,cur=null,timer=0,typ=0;
@@ -883,11 +897,21 @@ const NAVI=(()=>{
       if(n>=plain.length){clearInterval(typ);txt.innerHTML=html;pose(p,false)}},45);
   }
   function kwNav(t){return esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')}
-  function next(){k=(k+1)%NAVI_TIPS.length;cur=NAVI_TIPS[k];render(cur.t,true)}
-  function idle(){return helper.classList.contains('away')||busy||document.getElementById('title')?.getAttribute('aria-hidden')==='false'||document.hidden}
+  function next(){const c=naviCands();k=(k+1)%c.length;cur=c[k];render(cur.t,true)}
+  function top(){const c=naviCands();k=0;cur=c[0];render(cur.t,true)}
+  function talk(t){cur=null;render(t,false)}
+  function idle(){return menu.classList.contains('on')||helper.classList.contains('away')||busy||document.getElementById('title')?.getAttribute('aria-hidden')==='false'||document.hidden}
   function loop(){clearTimeout(timer);timer=setTimeout(()=>{if(!idle())next();loop()},9000)}
-  bub.addEventListener('click',()=>{if(!cur||busy)return;const s=byId[cur.st];if(!s||!s.el)return;NAVI_HL={st:s.id,i:cur.i};SFX.play('tap');tapStation(s,s.el)});
-  face.addEventListener('click',()=>{next();loop()});
+  const go=id=>{const s=byId[id];if(!s||!s.el||busy)return;SFX.play('tap');tapStation(s,s.el)};
+  bub.addEventListener('click',()=>{shut();if(!cur||busy)return;const s=byId[cur.st];if(!s||!s.el)return;NAVI_HL=cur.i!=null?{st:s.id,i:cur.i}:null;SFX.play('tap');tapStation(s,s.el)});
+  const menu=document.createElement('div');menu.className='nv-menu';menu.setAttribute('role','menu');
+  menu.innerHTML=`<button type="button" data-n="top">今日のおすすめは？</button><button type="button" data-n="prog">進み具合を教えて</button><button type="button" data-n="kyaku">お客さまに質問してもらう</button><button type="button" data-n="home">家で記録を見る</button><button type="button" data-n="next">ほかのひとこと</button>`;
+  helper.appendChild(menu);
+  function shut(){menu.classList.remove('on');face.setAttribute('aria-expanded','false')}
+  menu.addEventListener('click',e=>{const b=e.target.closest('[data-n]');if(!b)return;e.stopPropagation();const n=b.dataset.n;shut();
+    if(n==='top')top();else if(n==='prog')talk(naviProgress());else if(n==='next')next();else go(n);loop()});
+  face.addEventListener('click',e=>{e.stopPropagation();if(busy)return;const on=!menu.classList.contains('on');menu.classList.toggle('on',on);face.setAttribute('aria-expanded',on);SFX.play('tap');if(on)render('なにをしようか？',false),cur=null});
+  document.addEventListener('click',e=>{if(menu.classList.contains('on')&&!menu.contains(e.target)&&e.target!==face)shut()});
   setTimeout(()=>{pose('idle',false);loop()},0);
   return {next,render};
 })();
@@ -2169,7 +2193,7 @@ document.getElementById('reset').addEventListener('click',()=>{showTitle();hideC
 <script id="mr-noscroll">(function(){var e=document.getElementById("screen");if(e)e.addEventListener("scroll",function(){if(e.scrollTop||e.scrollLeft){e.scrollTop=0;e.scrollLeft=0}})})();</script>
 
 <script id="mr-upd">(function(){
-var B="20261117-0923-6898a5ba",bar=null,busy=false;
+var B="20261117-1133-d4bb40a7",bar=null,busy=false;
 function chk(){return fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){return j&&j.build&&j.build!==B?j.build:null}).catch(function(){return null})}
 function go(v){location.replace(location.pathname+'?v='+encodeURIComponent(v||Date.now()))}
 function show(v){if(bar)return;bar=document.createElement('div');bar.className='mr-upd';bar.setAttribute('role','status');
