@@ -3566,7 +3566,7 @@ window.mrOpening=play;
 })();</script>
 
 <script id="mr-upd">(function(){
-var B="20261118-0905-be2c0d64",bar=null,busy=false;
+var B="20261118-0920-8db3e139",bar=null,busy=false;
 function chk(){return fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){return j&&j.build&&j.build!==B?j.build:null}).catch(function(){return null})}
 function go(v){location.replace(location.pathname+'?v='+encodeURIComponent(v||Date.now()))}
 function show(v){if(bar)return;bar=document.createElement('div');bar.className='mr-upd';bar.setAttribute('role','status');
