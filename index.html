@@ -842,10 +842,10 @@ const BGM=(()=>{let on=true;try{on=localStorage.getItem('mr-bgm')!=='off'}catch(
   async function play(m){const b=await load(m);if(mode!==m||!on)return;let x=tr[m];
     if(!x){const g=c.createGain();g.gain.value=0;if(!mg){mg=c.createGain();mg.gain.value=vol;mg.connect(c.destination)}g.connect(mg);const s=c.createBufferSource();s.buffer=b;s.loop=true;s.loopStart=.06;s.loopEnd=b.duration-.03;s.connect(g);s.start(0,.06);x=tr[m]={g,s}}
     fadeTo(x.g,document.hidden?0:LVL[m],1.4);window.__bgm=m}
-  function go(m){want=m;if(!on||!c||m===mode)return;mode=m;Object.keys(tr).forEach(k=>{if(k!==m)fadeTo(tr[k].g,0,1)});play(m).catch(e=>{window.__bgmErr=String(e)})}
+  function go(m){want=m;if(!on||!c||m===mode)return;mode=m;Object.keys(tr).forEach(k=>{if(k!==m)fadeTo(tr[k].g,0,1)});if(m==='home'){window.__bgm=m;return}play(m).catch(e=>{window.__bgmErr=String(e)})}
   function start(){if(!on)return;c=SFX.ctx();if(!c)return;started=true;mode=null;go(want)}
   function stop(){Object.values(tr).forEach(x=>fadeTo(x.g,0,.5));mode=null}
-  setInterval(()=>{const m=document.querySelector('.visit')?'visit':(document.getElementById('scene').classList.contains('on')?'talk':'map');if(m!==want||m!==mode)go(m)},500);
+  setInterval(()=>{const sc=document.getElementById('scene'),m=document.querySelector('.visit')?'visit':(sc.classList.contains('on')?(sc.querySelector('#hmReset')?'home':'talk'):'map');if(m!==want||m!==mode)go(m)},500);
   document.addEventListener('visibilitychange',()=>{if(!on||!c||!mode||!tr[mode])return;fadeTo(tr[mode].g,document.hidden?0:LVL[mode],.5)});
   return {get vol(){return vol},set vol(v){vol=v;try{localStorage.setItem('mr-bgm-vol',v)}catch(e){}if(mg)mg.gain.setTargetAtTime(v,c.currentTime,.05)},get on(){return on},set on(v){on=v;try{localStorage.setItem('mr-bgm',v?'on':'off')}catch(e){}v?start():stop()},start}})();
 document.addEventListener('pointerdown',()=>BGM.start(),{once:true,capture:true});
